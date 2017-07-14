@@ -64,20 +64,11 @@ Here is an exploratory visualization of the data set. It is a bar chart showing 
 As a first step, I decided to convert the images to grayscale because it's easier and faster calculation and require less complex cnn. And also number of parameters gets reduced significantly. And we dont have to differentiate images based on colour so there is no harm in using gray scale. If we had to train model to identity red cat or black cat then using RGB colour channel would have been mandatory.
 
 Here is an example of a traffic sign image before and after grayscaling.
-![rgb scale](https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/gray_image1.png)
+![rgb scale](https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/rgb_image1.png)
 ![gray scale](https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/gray_image1.png)
 
-As a last step, I normalized the image data because ...
+As a last step, I normalized the image data to make it in -1 to +1 range.
 
-I decided to generate additional data because ... 
-
-To add more data to the the data set, I used the following techniques because ... 
-
-Here is an example of an original image and an augmented image:
-
-![alt text][image3]
-
-The difference between the original data set and the augmented data set is the following ... 
 
 
 ####2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
@@ -86,12 +77,17 @@ My final model consisted of the following layers:
 
 | Layer         		|     Description	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Input         		| 32x32x3 RGB image   							| 
-| Convolution 3x3     	| 1x1 stride, same padding, outputs 32x32x64 	|
+| Input         		| 32x32x1 Gray image   							| 
+| Convolution 5x5     	| 1x1 stride, same padding, outputs 28x28x6 	|
 | RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
-| Convolution 3x3	    | etc.      									|
-| Fully connected		| etc.        									|
+| Max pooling	      	| 2x2 stride,  outputs 14x14x6 				|
+| Convolution 5x5	     	| 1x1 stride, same padding, outputs 10x10x16 	|
+| Max pooling	      	| 2x2 stride,  outputs 5x5x16 				|
+| Fully connected		| 5x5x16 = 400        									|
+| Fully connected		| 400 to 122        									|
+| Fully connected dropour		| prob=.5        									|
+| Fully connected		| 84 to 43        									|
+| Fully connected dropour		| prob=.5        									|
 | Softmax				| etc.        									|
 |						|												|
 |						|												|
@@ -100,7 +96,7 @@ My final model consisted of the following layers:
 
 ####3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-To train the model, I used an ....
+To train the model, I trialed by varying all the parameter and used an epoch of 27 and batch size of 156. 
 
 ####4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
@@ -117,21 +113,24 @@ If an iterative approach was chosen:
 * What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
 
 If a well known architecture was chosen:
-* What architecture was chosen?
-* Why did you believe it would be relevant to the traffic sign application?
+* What architecture was chosen? 
+  I chose LeNet model, which we used on mnist data as part of exercise before.
+* Why did you believe it would be relevant to the traffic sign application? 
+  it worked well on mnist so i decided to use again.
 * How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
+I always got accuracy between 90 to 97%
  
 
 ###Test a Model on New Images
 
 ####1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Here are five German traffic signs that I found on the web:
+Here are six German traffic signs that I found on the web:
 
-![alt text][image4] ![alt text][image5] ![alt text][image6] 
-![alt text][image7] ![alt text][image8]
+![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign1.png] ![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign2.png] ![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign3.png] 
+![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign4.png] ![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign5.png] ![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign6.png]
 
-The first image might be difficult to classify because ...
+The third image might be difficult to classify because it's flipped image of traffic sign and model is not trained to recognise flipped images ...
 
 ####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
