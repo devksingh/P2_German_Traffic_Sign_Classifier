@@ -64,8 +64,8 @@ Here is an exploratory visualization of the data set. It is a bar chart showing 
 As a first step, I decided to convert the images to grayscale because it's easier and faster calculation and require less complex cnn. And also number of parameters gets reduced significantly. And we dont have to differentiate images based on colour so there is no harm in using gray scale. If we had to train model to identity red cat or black cat then using RGB colour channel would have been mandatory.
 
 Here is an example of a traffic sign image before and after grayscaling.
-
-![alt text]()
+![rgb scale](https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/gray_image1.png)
+![gray scale](https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/gray_image1.png)
 
 As a last step, I normalized the image data because ...
 
