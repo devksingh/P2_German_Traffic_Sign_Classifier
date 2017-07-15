@@ -127,10 +127,13 @@ I always got accuracy between 90 to 97%
 
 Here are six German traffic signs that I found on the web:
 
-![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign1.png] ![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign2.png] ![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign3.png] 
-![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign4.png] ![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign5.png] ![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign6.png]
+![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign1.png] 
+![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign3.png] 
+![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign4.png] 
+![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign5.png] 
+![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign6.png]
 
-The third image might be difficult to classify because it's flipped image of traffic sign and model is not trained to recognise flipped images ...
+The speed limit 80 image might be difficult to classify because half of digit 80 looks like 30 that's why cnn was not confident for this image.
 
 ####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
@@ -138,31 +141,40 @@ Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+| 80 km/ph      		| 30 km/ph   									| 
+| No Passing     			| No Passing 										|
+| Turn Left Ahead					| Turn Left Ahead											|
+| Ahead Only	      		| Ahead Only					 				|
+| 100 km/ph			| 100 km/ph      							|
 
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of 93.3%...
 
 ####3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
 The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
+For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities for the 80 km/ph image were
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
+| .94         			| 30 km/ph   									| 
+| .06     				| 50 km/ph 										|
+| .00					| 70 km/ph											|
+| .00	      			| Stop					 				|
+| .00				    | Roundabout      							|
 
 
-For the second image ... 
+For the No Passing image 
+
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| .94         			| 30 km/ph   									| 
+| .06     				| 50 km/ph 										|
+| .00					| 70 km/ph											|
+| .00	      			| Stop					 				|
+| .00				    | Roundabout      							|
+
 
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
 ####1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
