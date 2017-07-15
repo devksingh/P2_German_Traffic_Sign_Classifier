@@ -55,7 +55,7 @@ signs data set:
 
 Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
 
-![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/trafficsign_chart.png]
+![alt text](https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/trafficsign_chart.png)
 
 ###Design and Test a Model Architecture
 
