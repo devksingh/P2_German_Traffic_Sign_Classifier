@@ -96,27 +96,30 @@ My final model consisted of the following layers:
 
 ####3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-To train the model, I trialed by varying all the parameter and used an epoch of 27 and batch size of 156. 
+To train the model, I trialed by varying all the parameters and used an epoch of 30 and batch size of 124 with learning rate .00097. 
 
 ####4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 My final model results were:
-* training set accuracy of ?
-* validation set accuracy of ? 
-* test set accuracy of ?
+* training set accuracy of .995
+* validation set accuracy of .956 
+* test set accuracy of .933
 
 If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
-* What were some problems with the initial architecture?
+* What was the first architecture that was tried and why was it chosen? I chose lenet to start with as I had tried it on mnist and it worked really well. 
+* What were some problems with the initial architecture? I started with lenet only and after few calibrations itr worked well.
 * How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
+I started first without dropout and then added dropout. I also tried to add one more layer between 2 and 3 but it did not improve the result. I also tried to augment the data set with flip images on train dataset but it did not impro the result so I went ahead with lightweight model.
 * Which parameters were tuned? How were they adjusted and why?
+I tuned number of layers, tried to add labels, then I calibrated learning rate, Epoch and batch size. I also played with number of filters at each label but again went with 6, 16 for layer one and two.
 * What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
+Adding dropout layer improved the lenet model result. Adding/deleting layers and filters did not do any wonder.
 
 If a well known architecture was chosen:
 * What architecture was chosen? 
   I chose LeNet model, which we used on mnist data as part of exercise before.
 * Why did you believe it would be relevant to the traffic sign application? 
-  it worked well on mnist so i decided to use again.
+  It worked well on mnist so i decided to use again.
 * How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
 I always got accuracy between 90 to 97%
  
@@ -128,10 +131,10 @@ I always got accuracy between 90 to 97%
 Here are six German traffic signs that I found on the web:
 
 ![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign1.png] 
+![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign2.png] 
 ![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign3.png] 
 ![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign4.png] 
-![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign5.png] 
-![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign6.png]
+![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign5.png]
 
 The speed limit 80 image might be difficult to classify because half of digit 80 looks like 30 that's why cnn was not confident for this image.
 
@@ -148,13 +151,15 @@ Here are the results of the prediction:
 | 100 km/ph			| 100 km/ph      							|
 
 
+
+
 The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of 93.3%...
 
 ####3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
+The code for making predictions on my final model is located in the 24th cell of the Ipython notebook.
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities for the 80 km/ph image were
+The top five soft max probabilities for the 80 km/ph image were
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
@@ -169,11 +174,41 @@ For the No Passing image
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| .94         			| 30 km/ph   									| 
-| .06     				| 50 km/ph 										|
-| .00					| 70 km/ph											|
+| 1.00         			| No Passing   									| 
+| .00     				| No passing for vehicles over 3.5 metric tons 										|
+| .00					| Dangerous curve to the left											|
+| .00	      			| Dangerous curve to the right					 				|
+| .00				    | End of all speed and passing limits      							|
+
+For the Turn left ahead image 
+
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| 1.00         			| Turn left ahead   									| 
+| .00     				| Keep right										|
+| .00					| Turn right ahead											|
 | .00	      			| Stop					 				|
-| .00				    | Roundabout      							|
+| .00				    | Ahead only      							|
+
+For the 100 km/h image 
+
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| .41         			| 100 km/h   									| 
+| .27     				| 30 km/h 										|
+| .14					| Roundabout											|
+| .06	      			| 80 km/h					 				|
+| .03				    | 50 km/h      							|
+
+For the Ahead only image 
+
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| 1.00         			| Ahead only   									| 
+| .00     				| Road work 										|
+| .00					| 60 km/h											|
+| .00	      			| Yield					 				|
+| .00				    | Go straight or right      							|
 
 
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
