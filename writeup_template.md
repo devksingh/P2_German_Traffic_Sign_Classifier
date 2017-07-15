@@ -61,8 +61,12 @@ Here is an exploratory visualization of the data set. It is a bar chart showing 
 
 ####1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
 
-As a first step, I decided to convert the images to grayscale because it's easier and faster calculation and require less complex cnn. And also number of parameters gets reduced significantly. And we dont have to differentiate images based on colour so there is no harm in using gray scale. If we had to train model to identity red cat or black cat then using RGB colour channel would have been mandatory.
-
+At first I decided to run the cnn model with all the 3 colour channel which gave accuracy of the model close to 90%. But my rationale behind converting the images to gray scale is:
+1. We dont have have images which differes only on colour basis, like we dont have to differenciate between red guitar or black guitar. The images are distinct in feature and having RGB colour channel would not make any difference. I tried this as well and it did not make any diffrence. Therefore I went ahead with gray images so that model will have less parameters.
+Secondly I normalised the image data so that it ranges between -1 to +1, which is considered as best practice for training a model. So I tried (X_train/127.5-1), although I tried training the model without normalization and results were pretty bad.
+Thirdly I tried to augment the data inserting flip of the image by using numpy.fliplr function and rotated the image as wel., again it did not make any difference.
+My aim was to go with lighter model so I tried many things multiple time and if did not make any difference then I removed it.
+In the mean time I have also asked my mentor for good data augmentation tips and I would try to impletement those in future projects. I also watched stanford CS231n lectures for tips.
 Here is an example of a traffic sign image before and after grayscaling.
 ![rgb scale](https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/rgb_image1.png)
 ![gray scale](https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/gray_image1.png)
@@ -130,11 +134,11 @@ I always got accuracy between 90 to 97%
 
 Here are six German traffic signs that I found on the web:
 
-![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign1.png] 
-![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign2.png] 
-![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign3.png] 
-![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign4.png] 
-![alt text][https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign5.png]
+![alt text](https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign1.png) 
+![alt text](https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign2.png) 
+![alt text](https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign3.png) 
+![alt text](https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign4.png) 
+![alt text](https://github.com/devksingh/udacity_traffic_sign_classifier/blob/master/sign5.png)
 
 The speed limit 80 image might be difficult to classify because half of digit 80 looks like 30 that's why cnn was not confident for this image.
 
